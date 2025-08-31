@@ -37,19 +37,19 @@ const Navbar=()=>{
           <div className={classes.brandContainer}>
                      
 
-            <Typography component={Link} to="/" variant="h2" align="center"> <img className={classes.image} src={memories} alt="memories" height="60" />RefreshingMoments</Typography>
+            <Typography  className={classes.font} component={Link} to="/" variant="h2" align="center"> <img className={classes.image} src={memories} alt="memories" height="35" />Refreshing moments </Typography>
           </div>
           <Toolbar className={classes.toolbar}>
 {user?(
 <div className={classes.profile}>
 <Avatar className={!user?.result.picture && classes.purple} alt={user?.result?.name} src={user?.result?.picture}>{user?.result?.name?.charAt(0)}</Avatar>
-<Typography className={classes.userName} variant="h6">{user?.result?.name}</Typography>
+<Typography className={classes.userName} variant="p">{user?.result?.name}</Typography>
 <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>Logout</Button>
 </div>
 
 ):(
 
-<Button component={Link} to="/auth" variant="contained" color="primary" >Sign In</Button>
+<Button component={Link} to="/auth" variant="contained" color="primary" className={classes.font}>Sign In</Button>
 
 )}
           </Toolbar>
