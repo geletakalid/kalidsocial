@@ -7,7 +7,7 @@ import useStyles from './styles';
 import { useDispatch } from 'react-redux';
 import {useHistory,useLocation} from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input'
-import {getPosts} from '../../actions/posts';
+import {getPosts,getPostsBySearch} from '../../actions/posts';
 import Pagination from '../Pagination';
 
 function useQuery() {
@@ -30,8 +30,9 @@ useEffect(() => {
 
 
   const searchPost=()=>{
-if(search.trim()){
-  
+if(search?.trim()||tags){
+  dispatch(getPostsBySearch({search, tags: tags.join(',')}))
+  history.push(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`)
 }
 else{
   history.push('/')
@@ -39,7 +40,6 @@ else{
 }
   const handleKeypress = (e) => {
     if (e.keyCode === 13) {
-      // Perform search action
   searchPost();
     }
   };

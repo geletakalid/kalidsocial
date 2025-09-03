@@ -2,6 +2,7 @@ const CREATE = 'CREATE';
 const UPDATE = 'UPDATE';
 const DELETE = 'DELETE';
 const FETCH_ALL = 'FETCH_ALL';
+export const FETCH_BY_SEARCH = 'SEARCH';
 const LIKE = 'LIKE';
 export const AUTH = 'AUTH';
 export const LOGOUT = 'LOGOUT';
