@@ -24,9 +24,9 @@ const Home = () => {
   const searchQuery=query.get('searchQuery');
   const [search ,setSearch] = useState(searchQuery);
   const [tags, setTags] = useState([]);
-useEffect(() => {
-    dispatch(getPosts());
-  }, [dispatch,currentId]);
+// useEffect((page) => {
+//     dispatch(getPosts(page));
+//   }, [dispatch,currentId]);
 
 
   const searchPost=()=>{
@@ -70,9 +70,11 @@ const handleAdd=(tag)=>setTags([...tags, tag]);
                     </AppBar>
 
                     <Form currentId={currentId} setCurrentId={setCurrentId} />
-                    <Paper elevation={6} >
-                      <Pagination />
+                    {(!searchQuery && !tags.length) && (
+                    <Paper elevation={6} className={classes.pagination}> 
+                      <Pagination page={page} />
                     </Paper>
+                    )}
                   </Grid>
                 </Grid>
            

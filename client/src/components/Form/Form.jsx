@@ -52,7 +52,7 @@ return (<Paper  className={classes.paper}>
     }
    
     return (
-<Paper elevation={3} className={classes.paper}>
+<Paper elevation={6} className={classes.paper}>
    <form autoComplete="off" noValidate className={`${classes.form} ${classes.root}`} onSubmit={handleSubmit}>
       <Typography variant="h6">{!currentId ? 'Create a Post' : 'Update a Post'}</Typography>
      
