@@ -4,7 +4,7 @@ import useStyles from './styles';
 import {Link,useHistory,useLocation} from 'react-router-dom';
 import memories from '../../images/memories.png';
 import memoriesLogo from '../../images/memoriesLogo.png';
-import memoriesText from '../../images/memoriesText.png';
+import memoriesText from '../../images/memoriesText.jpg';
 
 import {useDispatch} from 'react-redux'
 import  jwtDecode  from 'jwt-decode';
@@ -40,8 +40,8 @@ const Navbar=()=>{
           <Link to="/" className={classes.brandContainer}>
                      
 
-            <img src={memoriesLogo} alt="memories" height="35" />
-            <img className={classes.image} src={memoriesText} alt="memories" height="35" />
+          
+            <img className={classes.image} src={memoriesText} alt="memories" height="100px" />
           </Link>
           <Toolbar className={classes.toolbar}>
 {user?(

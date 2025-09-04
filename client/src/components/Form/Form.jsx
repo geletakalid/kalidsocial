@@ -6,10 +6,12 @@ import useStyles from './styles';
 import { useDispatch } from "react-redux";
 import {createPost,updatePost} from '../../actions/posts';
 import { useSelector } from "react-redux";
+import { useHistory } from  "react-router-dom"
 const Form=({currentId,setCurrentId})=>{
-        const posts = useSelector((state) => state.posts);
+        const {posts} = useSelector((state) => state.posts);
         const post = currentId ? posts.find((p) => p._id === currentId) : null;
         const user= JSON.parse(localStorage.getItem('profile'));
+        const history=useHistory()
 useEffect(() => {
     if (post) {
         setPostData(post);
@@ -38,7 +40,7 @@ if(currentId){
     clear();
 }
 else {
-   (user?.result?.sub)?(dispatch(createPost({...postData, name: user?.result?.name ,creator: user?.result?.sub}))):(dispatch(createPost({...postData, name: user?.result?.name ,creator: user?.result?._id})))
+   (user?.result?.sub)?(dispatch(createPost({...postData, name: user?.result?.name ,creator: user?.result?.sub},history))):(dispatch(createPost({...postData, name: user?.result?.name ,creator: user?.result?._id},history)))
 
     clear();
 }
