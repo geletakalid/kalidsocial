@@ -9,6 +9,8 @@ import {useHistory,useLocation} from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input'
 import {getPosts,getPostsBySearch} from '../../actions/posts';
 import Pagination from '../Pagination';
+import { makeStyles } from '@material-ui/core/styles';
+import Footer from '../../Footer';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -52,8 +54,16 @@ else{
 const handleAdd=(tag)=>setTags([...tags, tag]);
 
   return (
+    <>
+                        <Posts setCurrentId={setCurrentId} />
+                      <Paper elevation={0} className={classes.pagination}>
+    <Pagination page={page} size="small" />
+  </Paper>
+  <Footer />
 
- <Grow in>
+
+      
+{/* <Grow in>
           <Container maxWidth="xl">
             
           
@@ -79,8 +89,13 @@ const handleAdd=(tag)=>setTags([...tags, tag]);
                 </Grid>
            
           </Container>
-        </Grow>
+        </Grow> */}
+  
+    </>
+
+
   )
+        
 }
 
 export default Home;

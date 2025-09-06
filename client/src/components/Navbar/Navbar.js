@@ -5,7 +5,7 @@ import {Link,useHistory,useLocation} from 'react-router-dom';
 import memories from '../../images/memories.png';
 import memoriesLogo from '../../images/memoriesLogo.png';
 import memoriesText from '../../images/memoriesText.jpg';
-
+import SearchAppBar from '../SearchAppBar'
 import {useDispatch} from 'react-redux'
 import  jwtDecode  from 'jwt-decode';
 const Navbar=()=>{
@@ -37,6 +37,7 @@ const Navbar=()=>{
 
     return(
           <AppBar className={classes.appBar} position="static" color="inherit">
+         
           <Link to="/" className={classes.brandContainer}>
                      
 

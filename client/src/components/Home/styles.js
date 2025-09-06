@@ -1,3 +1,4 @@
+import { colors } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
@@ -17,4 +18,14 @@ export default makeStyles((theme) => ({
       flexDirection: 'column-reverse',
     },
   },
+  pagination: {
+    display: "flex",
+    justifyContent: "center",  // centers horizontally
+    alignItems: "center",
+    padding: theme.spacing(1),
+    margin: `${theme.spacing(2)}px auto`, // centers the Paper itself
+    maxWidth: 300,  // keep it small (adjust as needed)
+    borderRadius: 8,
+    
+  }
 }));

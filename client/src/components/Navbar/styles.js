@@ -2,17 +2,21 @@ import { makeStyles } from '@material-ui/core/styles';
 import { deepPurple } from '@material-ui/core/colors';
 
 export default makeStyles((theme) => ({
+
+  
   appBar: {
-    borderRadius: 15,
-    margin: '20px 0',
+  
+    marginBottom: '20px',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '0px 0px',
+      width: '100%',
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
     },
+  
   },
   heading: {
     color: theme.palette.primary.main,
