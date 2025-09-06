@@ -117,8 +117,10 @@ const Post = ({ post, setCurrentId }) => {
             size="small"
             color="primary"
             onClick={(e) => {
+             
               e.stopPropagation(); // prevent card click
               setCurrentId(post._id);
+               history.push('/update-post')
             }}
           >
             Edit

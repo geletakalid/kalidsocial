@@ -301,7 +301,9 @@ export default function PrimarySearchAppBar() {
           className={!user?.result.picture && classes.purple}
           alt={user?.result?.name}
           src={user?.result?.picture}
-        >
+        >{
+          console.log(user?.result.picture)
+        }
           {user?.result?.name?.charAt(0)}
         </Avatar>
       </IconButton>

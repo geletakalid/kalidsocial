@@ -28,6 +28,12 @@ function App() {
           exact
           render={() => <Form currentId={currentId} setCurrentId={setCurrentId} />}
         />
+          <Route
+          path="/update-post"
+          exact
+          render={() => <Form currentId={currentId} setCurrentId={setCurrentId} />}
+        />
+
 
         {/* Post Details */}
         <Route path="/posts/:id" component={PostDetails} />
