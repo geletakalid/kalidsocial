@@ -19,6 +19,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Button from '@material-ui/core/Button';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import {Link,useHistory,useLocation} from 'react-router-dom';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 import {useDispatch} from 'react-redux'
 import  jwtDecode  from 'jwt-decode';
@@ -185,6 +186,18 @@ export default function PrimarySearchAppBar() {
         <p>{user?.result?.name}</p>
       </MenuItem>
 
+       <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+<AddCircleOutlineIcon/>
+        </IconButton>
+        <p>Create Post </p>
+      </MenuItem>
+
  <MenuItem onClick={logout}>
         <IconButton aria-label="show 4 new mails" color="inherit" >
         
@@ -258,39 +271,45 @@ export default function PrimarySearchAppBar() {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
 
-{user?(
+{user ? (
+    <>
+      <Button
+        component={Link}
+        to="/create-post" // <-- replace with your create route
+        color="inherit"
+        startIcon={<AddCircleOutlineIcon />}
+      >
+        Create Post
+      </Button>
 
-
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-<Avatar className={!user?.result.picture && classes.purple} alt={user?.result?.name} src={user?.result?.picture}>{user?.result?.name?.charAt(0)}</Avatar>
-            </IconButton>
-
-    
-):(
-
-
-          <IconButton component={Link} to="/auth">
-             <Button
-  variant="outlined"
-  color="primary"
-  style={{ backgroundColor: 'white' }}
->
-  Sign In
-</Button>
-          </IconButton>
-
-
-
-)}
-
-
+      <IconButton
+        edge="end"
+        aria-label="account of current user"
+        aria-controls={menuId}
+        aria-haspopup="true"
+        onClick={handleProfileMenuOpen}
+        color="inherit"
+      >
+        <Avatar
+          className={!user?.result.picture && classes.purple}
+          alt={user?.result?.name}
+          src={user?.result?.picture}
+        >
+          {user?.result?.name?.charAt(0)}
+        </Avatar>
+      </IconButton>
+    </>
+  ) : (
+    <IconButton component={Link} to="/auth">
+      <Button
+        variant="outlined"
+        color="primary"
+        style={{ backgroundColor: "white" }}
+      >
+        Sign In
+      </Button>
+    </IconButton>
+  )}
 
 
  

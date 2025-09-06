@@ -16,10 +16,9 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-const Home = () => {
+const Home = ({setCurrentId}) => {
   const query = useQuery();
   const history = useHistory();
-  const [currentId, setCurrentId] = useState(null);
   const classes = useStyles();
   const dispatch = useDispatch();
   const page=query.get('page')||1;
