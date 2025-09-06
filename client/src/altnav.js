@@ -114,6 +114,13 @@ export default function PrimarySearchAppBar() {
           
     
         }
+        
+        const createpost=()=>{
+          
+          history.push('/create-post');
+          
+    
+        }
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -186,7 +193,7 @@ export default function PrimarySearchAppBar() {
         <p>{user?.result?.name}</p>
       </MenuItem>
 
-       <MenuItem onClick={handleProfileMenuOpen}>
+       <MenuItem onClick={createpost}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"

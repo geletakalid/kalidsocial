@@ -15,7 +15,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        refreshingmoments.org
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -28,11 +28,11 @@ const Footer = () => {
   return (
   <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
-          Footer
+          Refreshing Moments
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
-        </Typography>
+Fueling your mornings with positivity and inspiration      
+  </Typography>
         <Copyright />
       </footer>
   )
