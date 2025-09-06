@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -26,5 +25,11 @@ export default makeStyles((theme) => ({
   },
   googleButton: {
     marginBottom: theme.spacing(2),
+  },
+  container: {
+    minHeight: '100vh',               // full screen height
+    display: 'flex',
+    justifyContent: 'center',         // center horizontally
+    alignItems: 'center',             // center vertically
   },
 }));

@@ -4,11 +4,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStyles from './styles';
 import Input from './input';
 import { useDispatch } from 'react-redux';
-import Icon from './icon';
 import { useHistory } from 'react-router-dom';
-import {signin, signup} from '../../actions/auth';
+import { signin, signup } from '../../actions/auth';
 import { GoogleLogin } from '@react-oauth/google';
-import  jwtDecode  from "jwt-decode";
+import jwtDecode from 'jwt-decode';
+
 const initialState = {
   email: '',
   password: '',
@@ -16,54 +16,52 @@ const initialState = {
   lastName: '',
   confirmPassword: ''
 };
+
 const Auth = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
-  const state = null;
   const [formData, setFormData] = useState(initialState);
   const history = useHistory();
+
   const handleShowPassword = () =>
     setShowPassword((prevShowPassword) => !prevShowPassword);
 
   const handleSubmit = (e) => {
-    console.log(formData)
- if(isSignUp){
-   e.preventDefault();
-   dispatch(signup(formData, history));
- }
- else{
-     e.preventDefault();
-
-   dispatch(signin(formData, history));
- }
+    e.preventDefault();
+    if (isSignUp) {
+      dispatch(signup(formData, history));
+    } else {
+      dispatch(signin(formData, history));
+    }
   };
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const switchMode = () => setIsSignUp((prevIsSignUp) => !prevIsSignUp);
-  
-  
+
   const googleSuccess = async (res) => {
     console.log(res);
-    const decoded =  jwtDecode(res?.credential);
- try {
-                // Dispatch login action with user data
-                dispatch({ type: 'AUTH', data: { result: decoded, token: res?.credential } });
+    const decoded = jwtDecode(res?.credential);
+    try {
+      dispatch({
+        type: 'AUTH',
+        data: { result: decoded, token: res?.credential },
+      });
+      history.push('/');
+    } catch (err) {
+      console.error('Error decoding Google credential', err);
+    }
+  };
 
-                history.push('/');
-
-              } catch (err) {
-                console.error('Error decoding Google credential', err);
-              }
-  }
-
-  const googleError = () => alert('Google Sign In was unsuccessful. Try again later');
+  const googleError = () =>
+    alert('Google Sign In was unsuccessful. Try again later');
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" className={classes.container}>
       <Paper className={classes.paper} elevation={3}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -122,16 +120,10 @@ const Auth = () => {
             {isSignUp ? 'Sign Up' : 'Sign In'}
           </Button>
 
-          {/* ✅ Fixed Google Sign In, keeping styling */}
+          {/* ✅ Google Sign In */}
           <GoogleLogin
             onSuccess={googleSuccess}
             onError={googleError}
-             // optional: enables Google One Tap
-            render={(renderProps) => (
-              <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled}  variant="contained">
-                Google Sign In
-              </Button>
-            )}
           />
 
           <Grid container justifyContent="flex-end">
