@@ -8,7 +8,8 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     backgroundColor: '#FAF3E7',
     padding: theme.spacing(6),
-    marginTop:'20px'
+    marginTop:'20px',
+    marginBottom:'0px'
   },
 }));
 function Copyright() {
