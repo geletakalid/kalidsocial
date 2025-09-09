@@ -12,7 +12,9 @@ import PrimarySearchAppBar from './altnav.js';
 import Posts from './components/Posts/Posts.jsx';
 import { Paper } from '@material-ui/core';
 import Pagination from '../src/components/Pagination.jsx';
-import { useLocation } from 'react-router-dom';
+import { useHistory,useLocation } from 'react-router-dom';
+import { getPostsBySearch } from './actions/posts.js';
+import { useDispatch } from 'react-redux';
 
 function Copyright() {
   return (
@@ -79,16 +81,16 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-export default function Homepage() {
+export default function Homepage({currentId,setCurrentId}) {
   const query = useQuery();
   const page = query.get('page') || 1;
   const classes = useStyles();
-  const [currentId, setCurrentId] = useState(null);
+  
 
   return (
     <React.Fragment>
       <CssBaseline />
-      <PrimarySearchAppBar />
+      <PrimarySearchAppBar setCurrentId={setCurrentId} currentId={currentId}/>
       <main>
         <MyCarousel />
         {/* Hero unit */}

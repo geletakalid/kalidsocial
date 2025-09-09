@@ -16,6 +16,7 @@ import moment from "moment";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deletePost, likePost, getPost } from "../../../actions/posts";
+import image from './../../../images/PostDefaultImage.jpg'
 
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
@@ -80,7 +81,7 @@ const Post = ({ post, setCurrentId }) => {
           className={classes.cardMedia}
           image={
             post.selectedFile ||
-            "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
+            image
           }
           title={post.title}
         />

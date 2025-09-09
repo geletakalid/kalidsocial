@@ -32,7 +32,7 @@ const Home = ({setCurrentId}) => {
 
   const searchPost=()=>{
 if(search?.trim()||tags){
-  dispatch(getPostsBySearch({search, tags: tags.join(',')}))
+  dispatch(getPostsBySearch({search:search}))
   history.push(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`)
 }
 else{
@@ -54,13 +54,36 @@ const handleAdd=(tag)=>setTags([...tags, tag]);
 
   return (
     <>
-                        <Posts setCurrentId={setCurrentId} />
-                      <Paper elevation={0} className={classes.pagination}>
-    <Pagination page={page} size="small" />
+                 <Posts setCurrentId={setCurrentId} />
+
+{!searchQuery ? (
+  <Paper 
+    elevation={0} 
+    className={classes.pagination} 
+    style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}
+  > 
+    <Pagination page={page} color="primary" size="large" />
   </Paper>
-  <Footer />
-
-
+) : (
+  <Paper 
+    elevation={0} 
+    className={classes.pagination} 
+    style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}
+  >
+    <Button 
+      variant="contained" 
+      onClick={() => history.push('/')}
+      style={{
+        backgroundColor: "#FAF3E7",
+        color: "#10716B",
+        fontWeight: "bold",
+        textTransform: "none",
+      }}
+    >
+      Back
+    </Button>
+  </Paper>
+)}
       
 {/* <Grow in>
           <Container maxWidth="xl">

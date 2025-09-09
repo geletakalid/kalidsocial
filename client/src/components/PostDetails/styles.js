@@ -23,10 +23,56 @@ export default makeStyles((theme) => ({
   },
   videoPlayer: {
     width: "100%",
-    height: "420px",
+    height: "500px",
     borderRadius: "15px",
     [theme.breakpoints.down("sm")]: {
-      height: "220px",
+      height: "250px",
+    },
+  },
+  image: {
+    width: "100%",
+    height: "500px",
+    objectFit: "cover",
+    borderRadius: "15px",
+    [theme.breakpoints.down("sm")]: {
+      height: "250px",
+    },
+  },
+  messageBox: {
+    maxHeight: "100px",
+    overflowY: "auto", // ✅ allow scroll
+    padding: "10px",
+    borderRadius: "10px",
+    marginBottom: "10px",
+    position: "relative",
+   
+
+    // Hide scrollbar but keep scrolling
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
+    "-ms-overflow-style": "none",
+    "scrollbar-width": "none",
+
+     [theme.breakpoints.down("sm")]: {
+      maxheight: "400px",
+    },
+  },
+  scrollControls: {
+    display: "flex",
+    justifyContent: "flex-end",
+    gap: "8px",
+    marginBottom: "15px", // space after buttons
+  },
+  scrollButton: {
+    background: "#1976d2",
+    color: "#fff",
+    borderRadius: "20px",
+    padding: "4px 12px",
+    fontSize: "0.8rem",
+    textTransform: "none",
+    "&:hover": {
+      background: "#1565c0",
     },
   },
   recommendedPosts: {
@@ -38,13 +84,17 @@ export default makeStyles((theme) => ({
   recommendedCard: {
     cursor: "pointer",
     borderRadius: "15px",
-    padding: "10px",
     boxShadow: theme.shadows[3],
     transition: "transform 0.2s ease",
     "&:hover": {
       transform: "scale(1.05)",
       boxShadow: theme.shadows[6],
     },
+  },
+  recommendedImage: {
+    height: 150,
+    width: "100%",
+    objectFit: "cover",
   },
   loadingPaper: {
     display: "flex",
@@ -60,11 +110,11 @@ export default makeStyles((theme) => ({
     gap: "15px",
   },
   commentsInnerContainer: {
-    maxHeight: "200px",
+    maxHeight: "100px",
     overflowY: "auto",
     marginRight: "10px",
     padding: "5px",
-    background: "#f9f9f9",
+    background: "#f7f5f5ff",
     borderRadius: "10px",
   },
 }));

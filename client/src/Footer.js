@@ -6,8 +6,9 @@ import Link from '@material-ui/core/Link';
 const useStyles = makeStyles((theme) => ({
  
   footer: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: '#FAF3E7',
     padding: theme.spacing(6),
+    marginTop:'20px'
   },
 }));
 function Copyright() {

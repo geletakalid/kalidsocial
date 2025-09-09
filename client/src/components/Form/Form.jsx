@@ -23,20 +23,25 @@ const Form = ({ currentId, setCurrentId }) => {
     title: "",
     message: "",
     tags: "",
+   youtubelink:"",
     selectedFile: "",
+ 
   });
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
 
   const classes = useStyles();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (post) setPostData(post);
-  }, [post]);
+useEffect(() => {
+  if (post) {
+    setPostData(post);
+  } else {
+    setPostData({ title: "", message: "", tags: "", selectedFile: "",youtubelink:"", }); // ✅ reset fields
+  }
+}, [currentId, post]);
 
   const clear = () => {
-    setPostData({ title: "", message: "", tags: "", selectedFile: "" });
+    setPostData({ title: "", message: "", tags: "", selectedFile: "",youtubelink:"", });
     setCurrentId(null);
     setProgress(0);
     setUploading(false);
@@ -131,6 +136,16 @@ const Form = ({ currentId, setCurrentId }) => {
           value={postData.tags}
           onChange={(e) =>
             setPostData({ ...postData, tags: e.target.value.split(",") })
+          }
+        />
+        <TextField
+          name="youtubelink"
+          variant="outlined"
+          label="YouTube Link"
+          fullWidth
+          value={postData.youtubelink}
+          onChange={(e) =>
+            setPostData({ ...postData, youtubelink: e.target.value })
           }
         />
 
