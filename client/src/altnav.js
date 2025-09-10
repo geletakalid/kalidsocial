@@ -52,8 +52,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
     objectFit: 'cover',
     [theme.breakpoints.up('sm')]: {
-      width: 40,
-      height: 40,
+      width: 50,
+      height: 50,
     },
   },
   search: {
@@ -325,7 +325,7 @@ export default function PrimarySearchAppBar({ setCurrentId, currentId }) {
                 <Button
                   variant="outlined"
                   color="primary"
-                  style={{ backgroundColor: 'white' }}
+                  style={{ backgroundColor: '#FAF3E7',color:'#10716B' }}
                 >
                   Sign In
                 </Button>
