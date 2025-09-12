@@ -81,7 +81,7 @@ const Post = () => {
   const videoUrl = getEmbedUrl(post.youtubelink);
 
   return (
-    <Paper style={{ padding: "5px", borderRadius: "15px" ,  marginTop:'5vw' }} >
+    <Paper style={{ padding: "5px", borderRadius: "15px" ,  marginTop:'80px' }} >
       <div className={classes.card}>
         {/* Left Section (Text + Comments) */}
         <div className={classes.section}>
