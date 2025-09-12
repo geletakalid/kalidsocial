@@ -116,6 +116,8 @@ export default function PrimarySearchAppBar({ setCurrentId, currentId }) {
   const history = useHistory();
   const location = useLocation();
   const query = useQuery();
+console.log(process.env.REACT_APP_PRIVILAGE);
+
 
   const searchQuery = query.get('searchQuery');
   const [search, setSearch] = useState(searchQuery);
@@ -147,9 +149,11 @@ export default function PrimarySearchAppBar({ setCurrentId, currentId }) {
   }, [location]);
 
   const logout = () => {
-    dispatch({ type: 'LOGOUT' });
-    setUser(null);
-    history.push('/');
+     dispatch({ type: 'LOGOUT' });
+  setUser(null);
+  setAnchorEl(null);
+  setMobileMoreAnchorEl(null);
+  history.push('/');
   };
 
   const createpost = () => {
@@ -179,6 +183,9 @@ export default function PrimarySearchAppBar({ setCurrentId, currentId }) {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  const privilagedUsers = process.env.REACT_APP_PRIVILAGE
+  ? process.env.REACT_APP_PRIVILAGE.split(",")
+  : [];
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -226,12 +233,20 @@ export default function PrimarySearchAppBar({ setCurrentId, currentId }) {
             <p>{user?.result?.name}</p>
           </MenuItem>
 
+                    {
+                 privilagedUsers.includes(user.result.email)&&(
+
           <MenuItem onClick={createpost}>
             <IconButton color="inherit">
               <AddCircleOutlineIcon />
             </IconButton>
             <p>Create Post </p>
           </MenuItem>
+                 )
+                  
+                 
+              }
+
 
           <MenuItem onClick={logout}>
             <IconButton color="inherit">
@@ -294,14 +309,24 @@ export default function PrimarySearchAppBar({ setCurrentId, currentId }) {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             {user ? (
+              
               <>
-                <Button
+              
+              {
+                 privilagedUsers.includes(user.result.email)&&(
+<Button
                   onClick={createpost}
                   startIcon={<AddCircleOutlineIcon />}
                   style={{ color: '#10716B' }}
                 >
                   Create Post
                 </Button>
+                 )
+                  
+                 
+              }
+           
+                
 
                 <IconButton
                   edge="end"
@@ -316,7 +341,8 @@ export default function PrimarySearchAppBar({ setCurrentId, currentId }) {
                     alt={user?.result?.name}
                     src={user?.result?.picture}
                   >
-                    {user?.result?.name?.charAt(0)}
+                
+                     {user?.result?.name?.charAt(0)} 
                   </Avatar>
                 </IconButton>
               </>
