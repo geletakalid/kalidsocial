@@ -23,32 +23,56 @@ const Form = ({ currentId, setCurrentId }) => {
     title: "",
     message: "",
     tags: "",
-   youtubelink:"",
+    youtubelink: "",
     selectedFile: "",
- 
   });
+
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [titleError, setTitleError] = useState("");
 
   const classes = useStyles();
   const dispatch = useDispatch();
-useEffect(() => {
-  if (post) {
-    setPostData(post);
-  } else {
-    setPostData({ title: "", message: "", tags: "", selectedFile: "",youtubelink:"", }); // ✅ reset fields
-  }
-}, [currentId, post]);
+
+  useEffect(() => {
+    if (post) {
+      setPostData(post);
+    } else {
+      setPostData({
+        title: "",
+        message: "",
+        tags: "",
+        selectedFile: "",
+        youtubelink: "",
+      });
+    }
+  }, [currentId, post]);
 
   const clear = () => {
-    setPostData({ title: "", message: "", tags: "", selectedFile: "",youtubelink:"", });
+    setPostData({
+      title: "",
+      message: "",
+      tags: "",
+      selectedFile: "",
+      youtubelink: "",
+    });
     setCurrentId(null);
     setProgress(0);
     setUploading(false);
+    setTitleError("");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // 🔴 Title validation
+    if (postData.title.length > 21) {
+      setTitleError("Title must be 21 characters or less");
+      return;
+    } else {
+      setTitleError("");
+    }
+
     if (currentId) {
       dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
       clear();
@@ -110,14 +134,20 @@ useEffect(() => {
           {!currentId ? "Create a Post" : "Update a Post"}
         </Typography>
 
+        {/* Title with validation */}
         <TextField
           name="title"
           variant="outlined"
           label="Title"
           fullWidth
           value={postData.title}
-          onChange={(e) => setPostData({ ...postData, title: e.target.value })}
+          onChange={(e) =>
+            setPostData({ ...postData, title: e.target.value })
+          }
+          error={Boolean(titleError)}
+          helperText={titleError}
         />
+
         <TextField
           name="message"
           variant="outlined"
@@ -126,7 +156,9 @@ useEffect(() => {
           multiline
           rows={4}
           value={postData.message}
-          onChange={(e) => setPostData({ ...postData, message: e.target.value })}
+          onChange={(e) =>
+            setPostData({ ...postData, message: e.target.value })
+          }
         />
         <TextField
           name="tags"
