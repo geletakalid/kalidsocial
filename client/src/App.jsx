@@ -29,7 +29,7 @@ function AppContent() {
 
   return (
     <>
-      {!hideNavbar && <PrimarySearchAppBar />}
+      {!hideNavbar && <PrimarySearchAppBar currentId={currentId} setCurrentId={setCurrentId} />}
 
       <Switch>
         {/* Auth Page */}
