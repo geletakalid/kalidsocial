@@ -65,7 +65,7 @@ export default makeStyles((theme) => ({
     marginBottom: "15px", // space after buttons
   },
   scrollButton: {
-    background: "#1976d2",
+    background: "#10716B",
     color: "#fff",
     borderRadius: "20px",
     padding: "4px 12px",

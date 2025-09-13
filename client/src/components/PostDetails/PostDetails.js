@@ -145,6 +145,7 @@ const Post = () => {
                     parseInt(window.getComputedStyle(text).lineHeight, 10) || 20;
                   box.scrollBy({ top: lineHeight, behavior: "smooth" });
                 }}
+              
               >
                 ↓ Down
               </Button>
