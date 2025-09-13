@@ -158,7 +158,7 @@ const Post = () => {
             </Typography>
             <Tooltip title="Share">
               <IconButton onClick={handleShare} color="primary">
-                <ShareIcon />
+                <ShareIcon style={{ color: "#10716B" }}  />
               </IconButton>
             </Tooltip>
           </div>

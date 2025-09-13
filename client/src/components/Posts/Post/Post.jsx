@@ -8,15 +8,18 @@ import {
   Button,
   Typography,
   ButtonBase,
+  IconButton,
+  Tooltip,
 } from "@material-ui/core";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
 import DeleteIcon from "@material-ui/icons/Delete";
+import ShareIcon from "@material-ui/icons/Share";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deletePost, likePost, getPost } from "../../../actions/posts";
-import image from './../../../images/PostDefaultImage.jpg'
+import image from "./../../../images/PostDefaultImage.jpg";
 
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
@@ -69,6 +72,27 @@ const Post = ({ post, setCurrentId }) => {
     history.push(`/posts/${post._id}`);
   };
 
+  // ✅ Share handler
+  const shareLink = `https://refreshingmoments.org/posts/${post._id}`;
+  const handleShare = async (e) => {
+    e.stopPropagation(); // prevent card click
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: post.title,
+          text: "Check out this post on Refreshing Moments!",
+          url: shareLink,
+        });
+      } catch (err) {
+        console.error("Error sharing:", err);
+      }
+    } else {
+      navigator.clipboard.writeText(shareLink);
+      alert("Link copied to clipboard!");
+    }
+  };
+
   return (
     <Card className={classes.card}>
       {/* Make entire card clickable */}
@@ -79,16 +103,13 @@ const Post = ({ post, setCurrentId }) => {
       >
         <CardMedia
           className={classes.cardMedia}
-          image={
-            post.selectedFile ||
-            image
-          }
+          image={post.selectedFile || image}
           title={post.title}
         />
 
         <div className={classes.overlay}>
-          <Typography variant="h6">{post.name}</Typography>
-          <Typography variant="body2">
+          <Typography variant="h6" style={{ color: "#10716B" }} >{post.name}</Typography>
+          <Typography variant="body2" style={{ color: "#10716B" }} >
             {moment(post.createdAt).fromNow()}
           </Typography>
         </div>
@@ -116,12 +137,11 @@ const Post = ({ post, setCurrentId }) => {
           user?.result?._id === post?.creator) && (
           <Button
             size="small"
-            color="primary"
+       style={{ color: "#10716B" }} 
             onClick={(e) => {
-             
               e.stopPropagation(); // prevent card click
               setCurrentId(post._id);
-               history.push('/update-post')
+              history.push("/update-post");
             }}
           >
             Edit
@@ -130,7 +150,7 @@ const Post = ({ post, setCurrentId }) => {
 
         <Button
           size="small"
-          color="primary"
+        style={{ color: "#10716B" }} 
           disabled={!user?.result}
           onClick={(e) => {
             e.stopPropagation(); // prevent card click
@@ -140,11 +160,18 @@ const Post = ({ post, setCurrentId }) => {
           <Likes />
         </Button>
 
+        {/* ✅ Share Button */}
+        <Tooltip title="Share">
+          <IconButton size="small" color="primary" onClick={handleShare}>
+            <ShareIcon fontSize="small" style={{ color: "#10716B" }} />
+          </IconButton>
+        </Tooltip>
+
         {(user?.result?.sub === post?.creator ||
           user?.result?._id === post?.creator) && (
           <Button
             size="small"
-            color="primary"
+        style={{ color: "#10716B" }} 
             onClick={(e) => {
               e.stopPropagation(); // prevent card click
               dispatch(deletePost(post._id));
