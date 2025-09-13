@@ -110,7 +110,7 @@ const Post = () => {
           <Typography variant="h4" component="h2" gutterBottom>
             {post.title}
           </Typography>
-          <Typography gutterBottom variant="h6" color="textSecondary">
+          <Typography gutterBottom variant="h6" color="textSecondary" sx={{ fontSize: "14px" }}>
             {post.tags.map((tag) => `#${tag} `)}
           </Typography>
 
@@ -154,7 +154,7 @@ const Post = () => {
 
           {/* Author + Share button */}
           <div style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
-            <Typography variant="subtitle1" color="textSecondary">
+            <Typography variant="subtitle1" color="textSecondary" sx={{ fontSize: "14px" }}>
               By {post.name}
             </Typography>
             <Tooltip title="Share">
