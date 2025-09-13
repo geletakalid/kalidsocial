@@ -8,6 +8,8 @@ import {
   CardContent,
   CardMedia,
   Button,
+  IconButton,
+  Tooltip,
 } from "@material-ui/core/";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
@@ -16,6 +18,7 @@ import CommentSection from "./CommentSection";
 import { getPost, getPostsBySearch } from "../../actions/posts";
 import useStyles from "./styles";
 import image from "./../../images/PostDefaultImage.jpg";
+import ShareIcon from "@material-ui/icons/Share";
 
 const Post = () => {
   const { post, posts, isLoading } = useSelector((state) => state.posts);
@@ -80,8 +83,27 @@ const Post = () => {
 
   const videoUrl = getEmbedUrl(post.youtubelink);
 
+  // ✅ Share handler
+  const shareLink = `https://refreshingmoments.org/posts/${post._id}`;
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: post.title,
+          text: "Check out this post on Refreshing Moments!",
+          url: shareLink,
+        });
+      } catch (err) {
+        console.error("Error sharing:", err);
+      }
+    } else {
+      navigator.clipboard.writeText(shareLink);
+      alert("Link copied to clipboard!");
+    }
+  };
+
   return (
-    <Paper style={{ padding: "5px", borderRadius: "15px" ,  marginTop:'80px' }} >
+    <Paper style={{ padding: "5px", borderRadius: "15px", marginTop: "80px" }}>
       <div className={classes.card}>
         {/* Left Section (Text + Comments) */}
         <div className={classes.section}>
@@ -129,16 +151,24 @@ const Post = () => {
             </div>
           )}
 
-          <Typography variant="subtitle1" color="textSecondary">
-            By {post.name}
-          </Typography>
+          {/* Author + Share button */}
+          <div style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
+            <Typography variant="subtitle1" color="textSecondary">
+              By {post.name}
+            </Typography>
+            <Tooltip title="Share">
+              <IconButton onClick={handleShare} color="primary">
+                <ShareIcon />
+              </IconButton>
+            </Tooltip>
+          </div>
+
           <Typography variant="body2" color="textSecondary">
             {moment(post.createdAt).fromNow()}
           </Typography>
           <Divider style={{ margin: "20px 0" }} />
 
           <CommentSection post={post} />
-         
         </div>
 
         {/* Right Section (Video Player or Fallback Image) */}
