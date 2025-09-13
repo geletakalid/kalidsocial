@@ -57,7 +57,7 @@ const Post = () => {
   if (isLoading) {
     return (
       <Paper elevation={6} className={classes.loadingPaper}>
-        <CircularProgress size="5em" />
+        <CircularProgress style={{ color: "#10716B" }} size="5em" />
       </Paper>
     );
   }
@@ -110,7 +110,7 @@ const Post = () => {
           <Typography variant="h4" component="h2" gutterBottom>
             {post.title}
           </Typography>
-          <Typography gutterBottom variant="h6" color="textSecondary" sx={{ fontSize: "14px" }}>
+          <Typography gutterBottom variant="subtitle2" color="textSecondary" >
             {post.tags.map((tag) => `#${tag} `)}
           </Typography>
 
@@ -154,7 +154,7 @@ const Post = () => {
 
           {/* Author + Share button */}
           <div style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
-            <Typography variant="subtitle1" color="textSecondary" sx={{ fontSize: "14px" }}>
+            <Typography variant="subtitle2" color="textSecondary" >
               By {post.name}
             </Typography>
             <Tooltip title="Share">

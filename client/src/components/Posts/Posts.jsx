@@ -13,7 +13,7 @@ const Posts=({setCurrentId})=>{
 //if(!posts.length && isLoading) return 'No posts';
 
     return (
-       isLoading ? <CircularProgress /> : (
+       isLoading ? <CircularProgress style={{ color: "#10716B" }} /> : (
         <Container className={classes.cardGrid} maxWidth="md">
            <Grid className={classes.container} container alignItems="stretch" spacing={3}>
                {posts.map((post) => (
