@@ -6,7 +6,13 @@
   height: 100vh;
   background-color: #faf3e7;
   flex-direction: column;
+
+
 }
+
+
+
+
 
 /* Zoom animation */
 @keyframes zoomInOut {

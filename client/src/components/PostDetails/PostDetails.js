@@ -36,8 +36,9 @@ const Post = () => {
   useEffect(() => {
     if (post) {
       dispatch(
-        getPostsBySearch({ search: "none", tags: post?.tags.join(",") })
+        getPostsBySearch( {search: `${post.title},${post.tags.join(",")}`})
       );
+      console.log({search: `${post.title},${post.tags.join(",")}`})
     }
   }, [post, dispatch]);
 
@@ -63,6 +64,7 @@ const Post = () => {
   }
 
   const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
+  console.log(recommendedPosts)
 
   // 🔹 Helper to extract embed URL from YouTube link
   const getEmbedUrl = (url) => {

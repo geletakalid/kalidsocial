@@ -83,25 +83,22 @@ export const likePost = async (req, res) => {
 };
 
 export const getPostsBySearch = async (req, res) => {
-try {
-        const { searchQuery} = req.query;
-        console.log(searchQuery)
-    
-        const title = new RegExp(searchQuery, 'i');
-console.log(title)
-        const posts = await PostMessage.find({
-  $or: [
-    { title: new RegExp(searchQuery, 'i') },
-    { tags: { $regex: new RegExp(searchQuery, 'i') } }
-  ]
-});
-   console.log(posts)
-        res.status(200).json(posts);
-    } catch (error) {
+  try {
+    const { searchQuery } = req.query;
+    const searchTerms = searchQuery.split(",").map(term => term.trim());
+    const regexArray = searchTerms.map(term => new RegExp(term, "i"));
+    const posts = await PostMessage.find({
+      $or: [
+        { title: { $in: regexArray } },
+        { tags: { $in: regexArray } }
+      ]
+    });
 
-        res.status(404).json({ message: error.message });
-    }
-}
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
 
 
 export const commentPost=async(req,res)=>{
