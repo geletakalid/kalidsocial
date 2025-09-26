@@ -256,8 +256,8 @@ console.log(process.env.REACT_APP_PRIVILAGE);
           </MenuItem>
         </div>
       ) : (
-        <MenuItem component={Link} to="/auth">
-          <IconButton color="inherit" component={Link} to="/auth">
+        <MenuItem component={Link} to="/signin">
+          <IconButton color="inherit" component={Link} to="/signin">
             <MeetingRoomIcon />
           </IconButton>
           <p>Sign In</p>
@@ -347,7 +347,7 @@ console.log(process.env.REACT_APP_PRIVILAGE);
                 </IconButton>
               </>
             ) : (
-              <IconButton component={Link} to="/auth">
+              <IconButton component={Link} to="/signin">
                 <Button
                   variant="outlined"
                   color="primary"
