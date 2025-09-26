@@ -23,7 +23,7 @@ function AppContent() {
 
   // hide navbar on these routes
   const hideNavbar =
-    location.pathname === "/auth" ||
+    location.pathname === "/signin" ||
     location.pathname === "/create-post" ||
     location.pathname === "/update-post";
 
@@ -34,7 +34,7 @@ function AppContent() {
       <Switch>
         {/* Auth Page */}
         <Route
-          path="/auth"
+          path="/signin"
           exact
           render={() => (!user ? <Auth /> : <Redirect to="/posts" />)}
         />
