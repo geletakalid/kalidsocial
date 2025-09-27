@@ -20,7 +20,9 @@ function Root() {
       try {
         const { data } = await fetchPosts(1); // wait for API
         console.log("Initial posts loaded:", data);
+       setTimeout(() => {
         setLoading(false);
+      }, 240000);
       } catch (err) {
         console.error("Error loading posts:", err);
         setError("Failed to load data");
