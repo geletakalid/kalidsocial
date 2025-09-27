@@ -22,7 +22,7 @@ function Root() {
         console.log("Initial posts loaded:", data);
        setTimeout(() => {
         setLoading(false);
-      }, 600000);
+      }, 420000);
       } catch (err) {
         console.error("Error loading posts:", err);
         setError("Failed to load data");
